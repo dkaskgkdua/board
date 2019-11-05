@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+// ±êÇé Å×½ºÆ® 1
 class RemoveActionListener implements ActionListener {
 	JTable table;
 	Statement stmt = null;
