@@ -1,7 +1,7 @@
 package test;
 
 import java.sql.Date;
-//ぞしぞし
+//ぞしぞしぞし
 public class Board {
 	private int no;					//腰硲
 	private String name;			//拙失切
