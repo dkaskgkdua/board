@@ -1,7 +1,7 @@
 package test;
 
 import java.sql.Date;
-
+//ㅎㅇㅎㅇ
 public class Board {
 	private int no;					//번호
 	private String name;			//작성자
