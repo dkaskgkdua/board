@@ -29,14 +29,14 @@ class TableInOut extends JFrame {
 	ArrayList<Board> firstData; 
 	
 	TableInOut() {
-		super("Âü°¡ÀÚ ¸í´Ü ÇÁ·Î±×·¥");
+		super("ì°¸ê°€ì ëª…ë‹¨ í”„ë¡œê·¸ë¨");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setPreferredSize(new Dimension(1200, 300));
 		setLocation(100, 100);
 		Container contentPane = getContentPane();
 		
-		String colName[] = { "±Û¹øÈ£" , "ÀÛ¼ºÀÚ", "ºñ¹Ğ¹øÈ£", "Á¦¸ñ", "³»¿ë", "ÆÄÀÏ¸í", "¿øº»ÆÄÀÏ¸í", "ÂüÁ¶¹øÈ£", "´äº¯ ·¹º§", "´äº¯¼ø¼­", "Á¶È¸¼ö", "³¯Â¥" };
+		String colName[] = { "ê¸€ë²ˆí˜¸" , "ì‘ì„±ì", "ë¹„ë°€ë²ˆí˜¸", "ì œëª©", "ë‚´ìš©", "íŒŒì¼ëª…", "ì›ë³¸íŒŒì¼ëª…", "ì°¸ì¡°ë²ˆí˜¸", "ë‹µë³€ ë ˆë²¨", "ë‹µë³€ìˆœì„œ", "ì¡°íšŒìˆ˜", "ë‚ ì§œ" };
 		
 		ArrayList<Object> al = new ArrayList<Object>();
 		
@@ -52,15 +52,15 @@ class TableInOut extends JFrame {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(p, BorderLayout.SOUTH);
 		
-		JButton InButton = new JButton("Ãß°¡");
-		JButton OutButton = new JButton("»èÁ¦");
-		JButton UpdateButton = new JButton("º¯°æ");
-		JButton AnsButton = new JButton("´äº¯");
+		JButton InButton = new JButton("ì¶”ê°€");
+		JButton OutButton = new JButton("ì‚­ì œ");
+		JButton UpdateButton = new JButton("ë³€ê²½");
+		JButton AnsButton = new JButton("ë‹µë³€");
 		
-		JLabel label1 = new JLabel("ÀÛ¼ºÀÚ");
-		JLabel label2 = new JLabel("ºñ¹Ğ¹øÈ£");
-		JLabel label3 = new JLabel("Á¦¸ñ");
-		JLabel label4 = new JLabel("³»¿ë");
+		JLabel label1 = new JLabel("ì‘ì„±ì");
+		JLabel label2 = new JLabel("ë¹„ë°€ë²ˆí˜¸");
+		JLabel label3 = new JLabel("ì œëª©");
+		JLabel label4 = new JLabel("ë‚´ìš©");
 		
 		JTextField tf1 = new JTextField();
 		tf1.setPreferredSize(new Dimension(70, 20));
@@ -94,24 +94,24 @@ class TableInOut extends JFrame {
 				model.addRow(b);
 			}
 		} else {
-			System.out.println("ÇöÀç ÀÔ·ÂµÈ °ªÀÌ ¾ø½À´Ï´Ù.");
+			System.out.println("í˜„ì¬ ì…ë ¥ëœ ê°’ì´ ì—†ìŠµë‹ˆë‹¤.");
 		}
 		
 		
-		// ÀÔ·Â ¹öÆ°
+		// ï¿½Ô·ï¿½ ï¿½ï¿½Æ°
 		InButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// db¿¡ °ª ÀÔ·Â
+				// dbï¿½ï¿½ ï¿½ï¿½ ï¿½Ô·ï¿½
 				insert(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText());
-				// ArrayList¿¡ db°ª ÀüºÎ ¹Ş¾Æ¿À±â
+				// ArrayListï¿½ï¿½ dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ï¿½ï¿½
 				
-				// ±âÁ¸ Å×ÀÌºí¿¡ ÀÖ´Â °ªµé ´Ù Áö¿ì±â
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 				for(int i = model.getRowCount()-1; i >= 0; i--) {
 					model.removeRow(i);
 				}
 				
 				ArrayList<Board> data = selectAll();
-				// °¡Á®¿Â °ªµé Å×ÀÌºí¿¡ Ã¤¿ì±â
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ Ã¤ï¿½ï¿½ï¿½
 				if(data.size() != 0) {
 						for(Board g : data) {
 							Object[] b = {g.getNo(), g.getName(), g.getPw(), g.getTitle(), g.getContent(),
@@ -120,12 +120,12 @@ class TableInOut extends JFrame {
 							model.addRow(b);
 						}
 					} else {
-						System.out.println("Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ ¾ø´Ù.");
+						System.out.println("í…Œì´ë¸”ì— ë°ì´í„°ê°€ ì—†ë‹¤.");
 					}
 						
 			}
 		});
-		//º¯°æ
+		//ï¿½ï¿½ï¿½ï¿½
 		AnsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -140,13 +140,13 @@ class TableInOut extends JFrame {
 				
 				insert2(referenceNo, ansLevelInt, ansSeqInt, tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText());
 				
-				// ±âÁ¸ Å×ÀÌºí¿¡ ÀÖ´Â °ªµé ´Ù Áö¿ì±â
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 				for(int i = model.getRowCount()-1; i >= 0; i--) {
 					model.removeRow(i);
 				}
 				
 				ArrayList<Board> data = selectAll();
-				// °¡Á®¿Â °ªµé Å×ÀÌºí¿¡ Ã¤¿ì±â
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ Ã¤ï¿½ï¿½ï¿½
 				if(data.size() != 0) {
 						for(Board g : data) {
 							Object[] b = {g.getNo(), g.getName(), g.getPw(), g.getTitle(), g.getContent(),
@@ -155,7 +155,7 @@ class TableInOut extends JFrame {
 							model.addRow(b);
 						}
 					} else {
-						System.out.println("Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ ¾ø´Ù.");
+						System.out.println("í…Œì´ë¸”ì— ë°ì´í„°ê°€ ì—†ë‹¤.");
 					}
 						
 			}
@@ -167,38 +167,38 @@ class TableInOut extends JFrame {
 					int row = e.getFirstRow();
 					int col = e.getColumn();
 					
-					// ¾÷µ¥ÀÌÆ® ÄÃ·³³×ÀÓ
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½
 					String colName = table.getColumnName(col);
-					// ¾÷µ¥ÀÌÆ® ÄÃ·³°ª
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ã·ï¿½ï¿½ï¿½
 					String val = table.getValueAt(row, col).toString();
 					
-					// ±âº»Å°°ª ¹Ş¾Æ¿À±â
+					// ï¿½âº»Å°ï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ï¿½ï¿½
 					String no = table.getValueAt(row, 0).toString();
 					int editno = Integer.parseInt(no);
-					if(colName.equals("ÀÛ¼ºÀÚ")) {
+					if(colName.equals("ï¿½Û¼ï¿½ï¿½ï¿½")) {
 						colName = "board_name";
-					} else if(colName.equals("ºñ¹Ğ¹øÈ£")) {
+					} else if(colName.equals("ï¿½ï¿½Ğ¹ï¿½È£")) {
 						colName = "board_pass";
-					} else if(colName.equals("Á¦¸ñ")) {
+					} else if(colName.equals("ï¿½ï¿½ï¿½ï¿½")) {
 						colName = "board_subject";
-					} else if(colName.equals("³»¿ë")) {
+					} else if(colName.equals("ï¿½ï¿½ï¿½ï¿½")) {
 						colName = "board_content";
 					} else {
-						System.out.println("ÄÃ·³³×ÀÓ Àß¸ø °¡Á®¿È");
+						System.out.println("ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					}
 						
-					// ¾÷µ¥ÀÌÆ® ±¸¹® ½ÇÇàÇÏ°í ¸î°³ ½ÇÇàµÆ´ÂÁö ¹İÈ¯¹ŞÀ½
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½î°³ ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½
 					int a = update(editno, colName, val);
 					
 					if (a == -1) {
-						System.out.println("¼öÁ¤ ½ÇÆĞ");
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 					} else {
-						System.out.println("¼öÁ¤ ¼º°ø");
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 					}
 					
-					System.out.println("¼±ÅÃµÈ Çà = " + row + "¼±ÅÃµÈ ¿­ = " + col + "°ª = " + val);
+					System.out.println("ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ = " + row + "ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ = " + col + "ï¿½ï¿½ = " + val);
 					} catch(Exception eee) {
-						System.out.println("¾÷µ¥ÀÌÆ®¹®¿¡ ÇÊµå°ª ¿¡·¯");
+						System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Êµå°ª ï¿½ï¿½ï¿½ï¿½");
 					}
 			}
 		});
@@ -214,45 +214,45 @@ class TableInOut extends JFrame {
 				if(!tf1.getText().equals("")) {
 					a = update(editno, "board_name" , tf1.getText());
 					if ( a == -1) {
-						System.out.println("ÀÛ¼ºÀÚ º¯°æ ½ÇÆĞ");
+						System.out.println("ì‘ì„±ì ë³€ê²½ ì‹¤íŒ¨");
 					} else {
-						System.out.println("ÀÛ¼ºÀÚ º¯°æ ¼º°ø");
+						System.out.println("ì‘ì„±ì ë³€ê²½ ì„±ê³µ");
 					}
 				}
 				if(!tf2.getText().equals("")) {
 					a = update(editno, "board_pass", tf2.getText());
 					if ( a == -1) {
-						System.out.println("ºñ¹Ğ¹øÈ£ º¯°æ ½ÇÆĞ");
+						System.out.println("ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ì‹¤íŒ¨");
 					} else {
-						System.out.println("ºñ¹Ğ¹øÈ£ º¯°æ ¼º°ø");
+						System.out.println("ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ ì„±ê³µ");
 					}
 				}
 				if(!tf3.getText().equals("")) {
 					a = update(editno, "board_subject", tf3.getText());
 					if ( a == -1) {
-						System.out.println("Á¦¸ñ º¯°æ ½ÇÆĞ");
+						System.out.println("ì œëª© ë³€ê²½ ì‹¤íŒ¨");
 					} else {
-						System.out.println("Á¦¸ñ º¯°æ ¼º°ø");
+						System.out.println("ì œëª© ë³€ê²½ ì„±ê³µ");
 					}
 				}
 				if(!tf4.getText().equals("")) {
 					a = update(editno, "board_content", tf4.getText());
 					if ( a == -1) {
-						System.out.println("³»¿ë º¯°æ ½ÇÆĞ");
+						System.out.println("ë‚´ìš© ë³€ê²½ ì‹¤íŒ¨");
 					} else {
-						System.out.println("³»¿ë º¯°æ ¼º°ø");
+						System.out.println("ë‚´ìš© ë³€ê²½ ì„±ê³µ");
 					}
 				}
 				if(a == -1) {
-					System.out.println("ÅØ½ºÆ®¹Ú½º¿¡ °ªÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+					System.out.println("í…ìŠ¤íŠ¸ë°•ìŠ¤ì— ê°’ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.");
 				}
 				
 				ArrayList<Board> data = selectAll();
-				// ±âÁ¸ Å×ÀÌºí¿¡ ÀÖ´Â °ªµé ´Ù Áö¿ì±â
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 				for(int i = model.getRowCount()-1; i >= 0; i--) {
 					model.removeRow(i);
 				}
-				// °¡Á®¿Â °ªµé Å×ÀÌºí¿¡ Ã¤¿ì±â
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ Ã¤ï¿½ï¿½ï¿½
 				if(data.size() != 0) {
 						for(Board g : data) {
 							Object[] b = {g.getNo(), g.getName(), g.getPw(), g.getTitle(), g.getContent(),
@@ -262,11 +262,11 @@ class TableInOut extends JFrame {
 							model.addRow(b);
 						}
 					} else {
-						System.out.println("Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ ¾ø´Ù.");
+						System.out.println("í…Œì´ë¸”ì— ë°ì´í„°ê°€ ì—†ë‹¤.");
 					}
 			}
 		});
-		// »èÁ¦ ¹öÆ° Å¬¸¯½Ã
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ï¿½ï¿½
 		ActionListener all = new RemoveActionListener(table);
 		OutButton.addActionListener(all);
 		//button.addActionListener(listener);
@@ -283,7 +283,7 @@ class TableInOut extends JFrame {
 		PreparedStatement pstmt = null;
 		StringBuilder sql= new StringBuilder();
 
-		sql.append("update board set "+ colName+ "= ? where board_num = ? ");
+		sql.append("update board2 set "+ colName+ "= ? where board_num = ? ");
 		
 		
 		
@@ -296,19 +296,19 @@ class TableInOut extends JFrame {
 			pstmt.setInt(2, editno);
 			result = pstmt.executeUpdate();
 		} catch (SQLException se) {
-			System.out.println("sql¿À·ù");
+			System.out.println("sqlì˜¤ë¥˜");
 		} finally {
 			try {
 				if (pstmt != null)
 					pstmt.close();
 			} catch (SQLException e) {
-				System.out.println("pstmt¿À·ù");
+				System.out.println("pstmtì˜¤ë¥˜");
 			}
 			try {
 				if(conn != null)
 					conn.close();
 			} catch(SQLException e) {
-				System.out.println("conn ¿À·ù");
+				System.out.println("conn ì˜¤ë¥˜");
 			}
 		}
 
@@ -348,7 +348,7 @@ class TableInOut extends JFrame {
 			}
 			
 		}  catch(SQLException se) {
-			System.out.println("SQL¿À·ù");
+			System.out.println("SQLï¿½ï¿½ï¿½ï¿½");
 		} finally {
 			
 			try {
@@ -373,7 +373,7 @@ class TableInOut extends JFrame {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
-		sql.append("select * from board order by board_re_ref desc, board_re_seq asc ");
+		sql.append("select * from board2 order by board_re_ref desc, board_re_seq asc ");
 		ArrayList<Board> arrst = new ArrayList<Board>();
 		
 		try {
@@ -428,13 +428,13 @@ class TableInOut extends JFrame {
 		return arrst;
 	}
 	
-// file, originalÀº null,  
+// file, originalï¿½ï¿½ null,  
 private static void insert(String name, String pw, String title, String content) {
 	Statement stmt = null;
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	StringBuilder sql = new StringBuilder();
-	sql.append("insert into board(board_num, board_name, board_pass, board_subject, board_content, board_re_ref, board_re_lev, board_re_seq, board_readcount, board_date) ");
+	sql.append("insert into board2(board_num, board_name, board_pass, board_subject, board_content, board_re_ref, board_re_lev, board_re_seq, board_readcount, board_date) ");
 	sql.append("values(board_seq.nextval, ?, ?, ?, ?, board_seq.nextval, 0, 0, 0, sysdate )");
 			
 	int result = 0;
@@ -449,7 +449,7 @@ private static void insert(String name, String pw, String title, String content)
 		pstmt.setString(4 , content);
 		
 		result = pstmt.executeUpdate();
-		System.out.println("db¿¡ ¹İ¿µµÊ . . . . . ");
+		System.out.println("dbï¿½ï¿½ ï¿½İ¿ï¿½ï¿½ï¿½ . . . . . ");
 		
 		
 	} catch (Exception e) {
@@ -470,9 +470,9 @@ private static void insert(String name, String pw, String title, String content)
 	}
 	
 	if(result == 1)
-		System.out.println("»ğÀÔ µÇ¾ú½À´Ï´Ù.");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 	else {
-		System.out.println("»ğÀÔ ½ÇÆĞµÊ");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ğµï¿½");
 	}
 }
 
@@ -481,7 +481,7 @@ public  static int updateSeq(int no, int referenceNo) {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	StringBuilder sql= new StringBuilder();
-	sql.append("update board set board_re_seq = board_re_seq+1 where board_re_ref = ? and board_re_seq >? ");
+	sql.append("update board2 set board_re_seq = board_re_seq+1 where board_re_ref = ? and board_re_seq >? ");
 	
 	
 	
@@ -495,7 +495,7 @@ public  static int updateSeq(int no, int referenceNo) {
 		result = pstmt.executeUpdate();
 		
 	}  catch(SQLException se) {
-		System.out.println("SQL¿À·ù");
+		System.out.println("SQLï¿½ï¿½ï¿½ï¿½");
 	} finally {
 		
 		try {
@@ -519,13 +519,13 @@ private static void insert2(int referenceNo, int ansLevel, int ansSeq, String na
 	PreparedStatement pstmt = null;
 	StringBuilder sql = new StringBuilder();
 	int addAns = ansLevel + 1;
-	sql.append("insert into board(board_num, board_name, board_pass, board_subject, board_content, board_re_ref, board_re_lev, board_re_seq, board_readcount, board_date) ");
+	sql.append("insert into board2(board_num, board_name, board_pass, board_subject, board_content, board_re_ref, board_re_lev, board_re_seq, board_readcount, board_date) ");
 	sql.append("values(board_seq.nextval, ?, ?, ?, ?, ?, ?, ?, 0, sysdate )");
 	int a = updateSeq(ansSeq, referenceNo);
 	if (a == -1) {
-		System.out.println("Seq ¾÷µ« ½ÇÆĞ");
+		System.out.println("Seq ì—…ëƒ ì‹¤íŒ¨");
 	} else {
-		System.out.println("Seq ¾÷µ« ¼º°ø");
+		System.out.println("Seq ì—…ëƒ ì„±ê³µ");
 	}
 	int result = 0;
 	try {
@@ -542,7 +542,7 @@ private static void insert2(int referenceNo, int ansLevel, int ansSeq, String na
 		pstmt.setInt(7, referenceNo+1);
 		//if(select max(board_re_seq) from board where board_re_ref = )
 		result = pstmt.executeUpdate();
-		System.out.println("db¿¡ ¹İ¿µµÊ . . . . . ");
+		System.out.println("dbì— ë°˜ì˜ë¨ . . . . . ");
 		
 		
 	} catch (Exception e) {
@@ -563,10 +563,11 @@ private static void insert2(int referenceNo, int ansLevel, int ansSeq, String na
 	}
 	
 	if(result == 1)
-		System.out.println("»ğÀÔ µÇ¾ú½À´Ï´Ù.");
+		System.out.println("ì‚½ì… ë˜ì—ˆìŠµë‹ˆë‹¤.");
 	else {
-		System.out.println("»ğÀÔ ½ÇÆĞµÊ");
+		System.out.println("ì‚½ì… ì‹¤íŒ¨ë¨");
 	}
+
 }
 
 }

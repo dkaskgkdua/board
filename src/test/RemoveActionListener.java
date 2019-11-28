@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-// ±êÇé Å×½ºÆ® 1
+// ê¹ƒí—™ í…ŒìŠ¤íŠ¸ 1
 class RemoveActionListener implements ActionListener {
 	JTable table;
 	Statement stmt = null;
@@ -24,7 +24,7 @@ class RemoveActionListener implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		StringBuilder sql = new StringBuilder();
-		
+		ResultSet rs;
 		
 
 		int result = -1;
@@ -32,56 +32,88 @@ class RemoveActionListener implements ActionListener {
 		int le = 0;
 		int re = 0;
 		int se = 0;
-		//String sel="";
 		try {
 		int row = table.getSelectedRow();
 		
-		String val = table.getValueAt(row, 0).toString();	    // ¼±ÅÃµÈ °ÍÀÇ NUM°ª
-		String ref = table.getValueAt(row, 7).toString();		// ¼±ÅÃµÈ °ÍÀÇ REF°ª
-		String level = table.getValueAt(row, 8).toString();		// ¼±ÅÃµÈ °ÍÀÇ LEV°ª
-		String seq = table.getValueAt(row, 9).toString();       // ¼±ÅÃµÈ °ÍÀÇ SEQ°ª
+		String val = table.getValueAt(row, 0).toString();	    // ì„ íƒëœ ê²ƒì˜ NUMê°’
+		String ref = table.getValueAt(row, 7).toString();		// ì„ íƒëœ ê²ƒì˜ REFê°’
+		String level = table.getValueAt(row, 8).toString();		// ì„ íƒëœ ê²ƒì˜ LEVê°’
+		String seq = table.getValueAt(row, 9).toString();       // ì„ íƒëœ ê²ƒì˜ SEQê°’
 		
 		no = Integer.parseInt(val);
 		re = Integer.parseInt(ref);
 		le = Integer.parseInt(level);
 		se = Integer.parseInt(seq);
 		
-		System.out.println("¼±ÅÃµÈ Çà = " + row + "°ª = " + val+ "±âº»Å° =" + no + "·¹º§ =" + le);
-		//sel = select(le,se);
+		System.out.println("ì„ íƒëœ í–‰ = " + row + "ê°’ = " + val+ "ê¸°ë³¸í‚¤ =" + no + "ë ˆë²¨ =" + le);
+	
 		
 		} catch (Exception ee) {
-			System.out.println("Å×ÀÌºí¿¡¼­ °ª ¹Ş¾Æ¿À´Â°Ô Àß¸ø µÊ");
+			System.out.println("í…Œì´ë¸”ì—ì„œ ê°’ ë°›ì•„ì˜¤ëŠ”ê²Œ ì˜ëª» ë¨");
 		}
 		
 		try {
 			
-		conn = ConnUtil2.getConnection();
-		sql.append("delete from board where BOARD_RE_REF = ? and BOARD_RE_LEV >=? and BOARD_RE_SEQ >= ? and BOARD_RE_SEQ < (select nvl(min(board_re_seq), 99999999999) from board where board_re_lev <= ? and board_re_seq > ?)");
-		pstmt = conn.prepareStatement(sql.toString());
-		pstmt.setInt(1,  re);
-		pstmt.setInt(2,  le);
-		pstmt.setInt(3,  se);
-		pstmt.setInt(4,  le);
-		pstmt.setInt(5,  se);
-		
-		result = pstmt.executeUpdate();
+			//String sql2 = "select max(board_re_seq)+1 from board2";
+			//sql.append("delete from board2 where BOARD_RE_REF = ? and BOARD_RE_LEV >=? and BOARD_RE_SEQ >= ? and BOARD_RE_SEQ < (select nvl(min(board_re_seq), ?) from board2 where board_re_lev <= ? and board_re_seq > ?)");	
+			
+			/*
+			String select_sql = "select board_re_ref, board_re_lev, board_re_seq from board where board_num = ?";
+				*/
+				sql.append("delete from board2 "
+				+ "where BOARD_RE_REF = ? "
+				+ "and BOARD_RE_LEV >=? "
+				+ "and BOARD_RE_SEQ >= ? "
+				+ "and BOARD_RE_SEQ < "
+				+ "					(nvl((select min(board_re_seq) "
+				+ "					from board2 "
+				+ "					where board_re_ref = ? "
+				+ "					and board_re_lev <= ? "
+				+ "					and board_re_seq > ?),"
+				+ "					(select max(board_re_seq)+1"
+				+ "					 from board2 where board_re_ref = ?)))");
+				
+			conn = ConnUtil2.getConnection();
+			/*pstmt = conn.prepareStatement(sql2);
+			rs = pstmt.executeQuery();
+			int max =0;
+			if(rs.next()) {
+				max = rs.getInt(1);
+			}*/
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1,  re);
+			pstmt.setInt(2,  le);
+			pstmt.setInt(3,  se);
+			pstmt.setInt(4,  re);
+			pstmt.setInt(5,  le);
+			pstmt.setInt(6,  se);
+			pstmt.setInt(7,  re);
+			/*
+			pstmt.setInt(1,  re);
+			pstmt.setInt(2,  le);
+			pstmt.setInt(3,  se);
+			pstmt.setInt(4, max);
+			pstmt.setInt(5,  le);
+			pstmt.setInt(6,  se);
+			*/
+			result = pstmt.executeUpdate();
 		
 		if (result != -1) {
-			System.out.println("»èÁ¦ ¿Ï·á");
+			System.out.println("ì‚­ì œ ì™„ë£Œ");
 		} else {
-			System.out.println("»èÁ¦ ½ÇÆĞ");
+			System.out.println("ì‚­ì œ ì‹¤íŒ¨");
 		}
 		} catch (SQLException see) {
-			System.out.println("µğºñ »èÁ¦Áß ¿À·ù");
+			System.out.println("ë””ë¹„ ì‚­ì œì¤‘ ì˜¤ë¥˜");
 		}
 		
 		ArrayList<Board> data = TableInOut.selectAll();
 		DefaultTableModel model = (DefaultTableModel)table.getModel();
-		// Å×ÀÌºí µ¥ÀÌÅÍ ÀüºÎ »èÁ¦
+		// í…Œì´ë¸” ë°ì´í„° ì „ë¶€ ì‚­ì œ
 		for(int i = model.getRowCount()-1; i >= 0; i--) {
 			model.removeRow(i);
 		}
-		// µğºñ¿¡¼­ °ª ºÒ·¯¿Í¼­ ´Ù½Ã »ğÀÔ
+		// ë””ë¹„ì—ì„œ ê°’ ë¶ˆëŸ¬ì™€ì„œ ë‹¤ì‹œ ì‚½ì…
 		if(data.size() != 0) {
 			for(Board g : data) {
 				Object[] b = {g.getNo(), g.getName(), g.getPw(), g.getTitle(), g.getContent(),
@@ -90,17 +122,17 @@ class RemoveActionListener implements ActionListener {
 				model.addRow(b);
 			}
 		} else {
-			System.out.println("Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ ¾ø´Ù.");
+			System.out.println("í…Œì´ë¸”ì— ë°ì´í„°ê°€ ì—†ë‹¤.");
 		}
 	}
 	
-	// »èÁ¦ÇÏ´Â ¹üÀ§
+	// ì‚­ì œí•˜ëŠ” ë²”ìœ„
 	public static String select(int lev, int seq) {
 		Statement stmt2 = null;
 		Connection conn2 = null;
 		PreparedStatement pstmt2 = null;
 		StringBuilder sql2 = new StringBuilder();
-		sql2.append("select min(BOARD_RE_SEQ) from board where BOARD_RE_LEV <= ? and BOARD_RE_SEQ > ?");
+		sql2.append("select min(BOARD_RE_SEQ) from board2 where BOARD_RE_LEV <= ? and BOARD_RE_SEQ > ?");
 		String answer = "";
 		
 		try {
@@ -119,7 +151,7 @@ class RemoveActionListener implements ActionListener {
 			
 			
 		}  catch(SQLException se) {
-			System.out.println("SQL¿À·ù");
+			System.out.println("SQLì˜¤ë¥˜");
 		} finally {
 			
 			try {
